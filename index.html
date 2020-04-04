@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Screen Collection</title>
+    <style type="text/css">
+
+        htmnl, body, div {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: block;
+            height: 100%;
+        }
+
+        @-ms-viewport {
+            width: device-width;
+        }
+
+        .step {
+            display: none;
+            text-align: center;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        var collection = {};
+        var current = undefined;
+        var count = 0;
+
+        function resetCollection() {
+            current = undefined;
+            collection = {
+                1: {},
+                2: {},
+                3: {},
+                4: {},
+                recorded: []
+            };
+        }
+
+        function getScreenData() {
+            // screen resolution
+            var sw = window.screen.width;
+            var sh = window.screen.height;
+            var saw = window.screen.availWidth;
+            var sah = window.screen.availHeight;
+            var ww = window.innerWidth;
+            var wh = window.innerHeight;
+            //var dppx = (window.devicePixelRatio || 0);
+            var pxr = window.devicePixelRatio || (window.screen.availWidth / document.documentElement.clientWidth);
+            var jso = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+            //var cso =
+
+            return {
+                screenWidth: window.screen.width,
+                screenHeight: window.screen.height,
+                screenAvailWidth: window.screen.availWidth,
+                screenAvailHeight: window.screen.availHeight,
+                windowWidth: window.innerWidth,
+                windowHeight: window.innerHeight,
+                devicePixelRatio: window.devicePixelRatio || (window.screen.availWidth / document.documentElement.clientWidth),
+                screenOrientation: (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation,
+                mediaOrientation: 'tbd',
+                action: count++
+            };
+
+        }
+
+        function pushData() {
+
+        }
+
+        function inputFocus() {
+            console.log("input focus");
+            current = getScreenData();
+        }
+
+        function goNextStep(currentStep) {
+            console.log("next step");
+            collection[currentStep] = (current || getScreenData());
+            document.getElementById('step' + currentStep).classList.remove('show');
+            document.getElementById('step' + (currentStep + 1)).classList.add('show');
+            current = undefined;
+            console.log(collection);
+            return false;
+        }
+
+        resetCollection();
+
+    </script>
+
+    <div id="step1" class="step show">
+        <h1>1. Put phone in landscape (horizontal) orientation and then push next.</h1>
+        <br />
+        <button onclick="return goNextStep(1);">Next</button>
+    </div>
+
+    <div id="step2" class="step">
+        <h1>2. Put focus on the text box below, let the keyboard show, and then push next.</h1>
+        <br />
+        <input type="text" onfocus="inputFocus();" />
+        <br />
+        <button onclick="return goNextStep(2);">Next</button>
+    </div>
+
+    <div id="step3" class="step">
+        <h1>3. Put phone in portrait (vertical) orientation and then push next.</h1>
+        <br />
+        <button onclick="return goNextStep(3);">Next</button>
+    </div>
+
+    <div id="step4" class="step">
+        <h1>4. Put focus on the text box below, let the keyboard show, and then push next.</h1>
+        <br />
+        <input type="text" onfocus="inputFocus();" />
+        <br />
+        <button onclick="return goNextStep(4);">Next</button>
+    </div>
+
+    <div id="step5" class="step">
+        <h1>5. Press the upload button to submit</h1>
+        <br />
+        <button onclick="return false;">Upload</button>
+    </div>
+
+</body>
+</html>
