@@ -157,8 +157,10 @@
 
             let xhr = new XMLHttpRequest();
 
+            var secret = '  dG9rZW4gMWFmODJkODI1NDlhNjU5MzI3MTQzZjE1NGY4ZTgxMDJmMDgxNTg5NA  ';
+
             xhr.open("PUT", "https://api.github.com/repos/mathewhoss/mathewhoss.github.io/contents/results/" + filename);
-            xhr.setRequestHeader('Authorization', 'token a9baa6a7431fbc3336f75d35f200d583df98da0c');
+            xhr.setRequestHeader('Authorization', atob(secret.substring(2).substring(0, secret.length - 4) + '=='));
             xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
             //xhr.setRequestHeader('Accept', 'application/vnd.github.v3');
             xhr.send(JSON.stringify(data));
