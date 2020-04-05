@@ -28,12 +28,30 @@
             display: block;
         }
     </style>
+
 </head>
 <body>
+
+
     <script type="text/javascript">
         var collection = {};
         var current = undefined;
         var count = 0;
+
+        function debounce(func, wait, immediate) {
+            var timeout;
+            return function () {
+                var context = this, args = arguments;
+                var later = function () {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                var callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        };
 
         function resetCollection() {
             current = undefined;
@@ -47,17 +65,17 @@
         }
 
         function getScreenData() {
-            // screen resolution
-            var sw = window.screen.width;
-            var sh = window.screen.height;
-            var saw = window.screen.availWidth;
-            var sah = window.screen.availHeight;
-            var ww = window.innerWidth;
-            var wh = window.innerHeight;
-            //var dppx = (window.devicePixelRatio || 0);
-            var pxr = window.devicePixelRatio || (window.screen.availWidth / document.documentElement.clientWidth);
-            var jso = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
-            //var cso =
+            //// screen resolution
+            //var sw = window.screen.width;
+            //var sh = window.screen.height;
+            //var saw = window.screen.availWidth;
+            //var sah = window.screen.availHeight;
+            //var ww = window.innerWidth;
+            //var wh = window.innerHeight;
+            ////var dppx = (window.devicePixelRatio || 0);
+            //var pxr = window.devicePixelRatio || (window.screen.availWidth / document.documentElement.clientWidth);
+            //var jso = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+            ////var cso =
 
             return {
                 screenWidth: window.screen.width,
@@ -66,7 +84,8 @@
                 screenAvailHeight: window.screen.availHeight,
                 windowWidth: window.innerWidth,
                 windowHeight: window.innerHeight,
-                devicePixelRatio: window.devicePixelRatio || (window.screen.availWidth / document.documentElement.clientWidth),
+                devicePixelRatio: window.devicePixelRatio,
+                assumedPixelRatio: (window.screen.availWidth / document.documentElement.clientWidth),
                 screenOrientation: (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation,
                 mediaOrientation: 'tbd',
                 action: count++
@@ -74,7 +93,18 @@
 
         }
 
-        function pushData() {
+        function isDataSame(one, two) {
+            if (one.screenWidth != two.screenWidth) {
+                return false;
+            }
+
+            if (one.screenHeight != two.screenHeight) {
+                return false;
+            }
+
+            if (one.screenOrientation != two.screenOrientation) {
+                return false;
+            }
 
         }
 
@@ -93,7 +123,73 @@
             return false;
         }
 
-        resetCollection();
+        function sendData() {
+
+            //var oauthAuth = new window.GitHub({
+            //    token: 'a9baa6a7431fbc3336f75d35f200d583df98da0c'
+            //});
+
+            //var repository = window.oauthAuth.getRepo('mathewhoss', 'mathewhoss.github.io');
+
+            /*repository.write(
+                'master', // e.g. 'master'
+                'test.txt', // e.g. 'blog/index.md'
+                'THE_CONTENT', // e.g. 'Hello world, this is my new content'
+                'YOUR_COMMIT_MESSAGE', // e.g. 'Created new index'
+                function (err) { }
+            );*/
+
+            let data = {
+                message: "data send",
+                content: btoa(JSON.stringify(collection, null, 2))
+            };
+
+            let id = 'xxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+
+            let d = new Date();
+            let n = d.getTime();
+
+            let filename = n + '-' + id + '.txt';
+
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open("PUT", "https://api.github.com/repos/mathewhoss/mathewhoss.github.io/contents/results/" + filename);
+            xhr.setRequestHeader('Authorization', 'token a9baa6a7431fbc3336f75d35f200d583df98da0c');
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            //xhr.setRequestHeader('Accept', 'application/vnd.github.v3');
+            xhr.send(JSON.stringify(data));
+
+            document.getElementById('step5').classList.remove('show');
+            document.getElementById('step6').classList.add('show');
+
+            return false;
+        }
+
+        var resizeDebounce = debounce(function () {
+            var toAdd = getScreenData();
+            var result = false;
+            var pos;
+            for (pos = 0; pos < collection.recorded.length; pos++) {
+                result = result | isDataSame(collection.recorded[0], toAdd);
+            }
+
+            if (!result) {
+                collection.recorded.push(toAdd);
+            }
+        }, 250);
+
+        function setup() {
+            resetCollection();
+            collection.recorded.push(getScreenData());
+            window.addEventListener('resize', resizeDebounce);
+        }
+
+        setup();
+
 
     </script>
 
@@ -128,7 +224,11 @@
     <div id="step5" class="step">
         <h1>5. Press the upload button to submit</h1>
         <br />
-        <button onclick="return false;">Upload</button>
+        <button onclick="return sendData();">Upload</button>
+    </div>
+
+    <div id="step6" class="step">
+        <h1>Thank You</h1>
     </div>
 
 </body>
