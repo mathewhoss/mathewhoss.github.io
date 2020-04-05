@@ -1,0 +1,88 @@
+{
+  "1": {
+    "screenWidth": 375,
+    "screenHeight": 812,
+    "screenAvailWidth": 375,
+    "screenAvailHeight": 812,
+    "windowWidth": 724,
+    "windowHeight": 292,
+    "devicePixelRatio": 3,
+    "assumedPixelRatio": 0.5179558011049724,
+    "mediaOrientation": "landscape",
+    "action": 2
+  },
+  "2": {
+    "screenWidth": 375,
+    "screenHeight": 812,
+    "screenAvailWidth": 375,
+    "screenAvailHeight": 812,
+    "windowWidth": 724,
+    "windowHeight": 292,
+    "devicePixelRatio": 3,
+    "assumedPixelRatio": 0.5179558011049724,
+    "mediaOrientation": "landscape",
+    "action": 3
+  },
+  "3": {
+    "screenWidth": 375,
+    "screenHeight": 812,
+    "screenAvailWidth": 375,
+    "screenAvailHeight": 812,
+    "windowWidth": 375,
+    "windowHeight": 635,
+    "devicePixelRatio": 3,
+    "assumedPixelRatio": 1,
+    "mediaOrientation": "portrait",
+    "action": 5
+  },
+  "4": {
+    "screenWidth": 375,
+    "screenHeight": 812,
+    "screenAvailWidth": 375,
+    "screenAvailHeight": 812,
+    "windowWidth": 375,
+    "windowHeight": 635,
+    "devicePixelRatio": 3,
+    "assumedPixelRatio": 1,
+    "mediaOrientation": "portrait",
+    "action": 6
+  },
+  "recorded": [
+    {
+      "screenWidth": 375,
+      "screenHeight": 812,
+      "screenAvailWidth": 375,
+      "screenAvailHeight": 812,
+      "windowWidth": 375,
+      "windowHeight": 635,
+      "devicePixelRatio": 3,
+      "assumedPixelRatio": 1,
+      "mediaOrientation": "portrait",
+      "action": 0
+    },
+    {
+      "screenWidth": 375,
+      "screenHeight": 812,
+      "screenAvailWidth": 375,
+      "screenAvailHeight": 812,
+      "windowWidth": 724,
+      "windowHeight": 292,
+      "devicePixelRatio": 3,
+      "assumedPixelRatio": 0.5179558011049724,
+      "mediaOrientation": "landscape",
+      "action": 1
+    },
+    {
+      "screenWidth": 375,
+      "screenHeight": 812,
+      "screenAvailWidth": 375,
+      "screenAvailHeight": 812,
+      "windowWidth": 258,
+      "windowHeight": 437,
+      "devicePixelRatio": 3,
+      "assumedPixelRatio": 1,
+      "mediaOrientation": "portrait",
+      "action": 4
+    }
+  ]
+}
