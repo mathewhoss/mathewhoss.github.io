@@ -87,7 +87,7 @@
                 devicePixelRatio: window.devicePixelRatio,
                 assumedPixelRatio: (window.screen.availWidth / document.documentElement.clientWidth),
                 screenOrientation: (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation,
-                mediaOrientation: cssQueryLandscape ? 'landscape' : cssQueryPortrait ? 'portrait' : 'unknown',
+                mediaOrientation: cssQueryLandscape.matches ? 'landscape' : cssQueryPortrait.matches ? 'portrait' : 'unknown',
                 action: count++
             };
 
