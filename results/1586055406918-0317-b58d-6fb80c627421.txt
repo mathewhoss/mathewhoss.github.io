@@ -1,0 +1,121 @@
+{
+  "1": {
+    "screenWidth": 2560,
+    "screenHeight": 1440,
+    "screenAvailWidth": 2560,
+    "screenAvailHeight": 1400,
+    "windowWidth": 1181,
+    "windowHeight": 457,
+    "devicePixelRatio": 1,
+    "assumedPixelRatio": 2.1974248927038626,
+    "screenOrientation": "landscape-primary",
+    "mediaOrientation": "landscape",
+    "action": 1
+  },
+  "2": {
+    "screenWidth": 1707,
+    "screenHeight": 960,
+    "screenAvailWidth": 1707,
+    "screenAvailHeight": 933,
+    "windowWidth": 787,
+    "windowHeight": 305,
+    "devicePixelRatio": 1.5,
+    "assumedPixelRatio": 2.1969111969111967,
+    "screenOrientation": "landscape-primary",
+    "mediaOrientation": "landscape",
+    "action": 4
+  },
+  "3": {
+    "screenWidth": 2560,
+    "screenHeight": 1440,
+    "screenAvailWidth": 2560,
+    "screenAvailHeight": 1400,
+    "windowWidth": 1372,
+    "windowHeight": 564,
+    "devicePixelRatio": 1,
+    "assumedPixelRatio": 1.887905604719764,
+    "screenOrientation": "landscape-primary",
+    "mediaOrientation": "landscape",
+    "action": 7
+  },
+  "4": {
+    "screenWidth": 2560,
+    "screenHeight": 1440,
+    "screenAvailWidth": 2560,
+    "screenAvailHeight": 1400,
+    "windowWidth": 1372,
+    "windowHeight": 564,
+    "devicePixelRatio": 1,
+    "assumedPixelRatio": 1.887905604719764,
+    "screenOrientation": "landscape-primary",
+    "mediaOrientation": "landscape",
+    "action": 8
+  },
+  "recorded": [
+    {
+      "screenWidth": 2560,
+      "screenHeight": 1440,
+      "screenAvailWidth": 2560,
+      "screenAvailHeight": 1400,
+      "windowWidth": 1181,
+      "windowHeight": 457,
+      "devicePixelRatio": 1,
+      "assumedPixelRatio": 2.167654530059272,
+      "screenOrientation": "landscape-primary",
+      "mediaOrientation": "landscape",
+      "action": 0
+    },
+    {
+      "screenWidth": 2048,
+      "screenHeight": 1152,
+      "screenAvailWidth": 2048,
+      "screenAvailHeight": 1120,
+      "windowWidth": 945,
+      "windowHeight": 366,
+      "devicePixelRatio": 1.25,
+      "assumedPixelRatio": 2.1974248927038626,
+      "screenOrientation": "landscape-primary",
+      "mediaOrientation": "landscape",
+      "action": 2
+    },
+    {
+      "screenWidth": 1707,
+      "screenHeight": 960,
+      "screenAvailWidth": 1707,
+      "screenAvailHeight": 933,
+      "windowWidth": 787,
+      "windowHeight": 305,
+      "devicePixelRatio": 1.5,
+      "assumedPixelRatio": 2.1969111969111967,
+      "screenOrientation": "landscape-primary",
+      "mediaOrientation": "landscape",
+      "action": 3
+    },
+    {
+      "screenWidth": 2560,
+      "screenHeight": 1440,
+      "screenAvailWidth": 2560,
+      "screenAvailHeight": 1400,
+      "windowWidth": 1181,
+      "windowHeight": 457,
+      "devicePixelRatio": 1,
+      "assumedPixelRatio": 2.1974248927038626,
+      "screenOrientation": "landscape-primary",
+      "mediaOrientation": "landscape",
+      "action": 5
+    },
+    {
+      "screenWidth": 2560,
+      "screenHeight": 1440,
+      "screenAvailWidth": 2560,
+      "screenAvailHeight": 1400,
+      "windowWidth": 1372,
+      "windowHeight": 564,
+      "devicePixelRatio": 1,
+      "assumedPixelRatio": 1.887905604719764,
+      "screenOrientation": "landscape-primary",
+      "mediaOrientation": "landscape",
+      "action": 6
+    }
+  ]
+}
