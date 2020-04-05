@@ -7,7 +7,7 @@
     <title>Screen Collection</title>
     <style type="text/css">
 
-        htmnl, body, div {
+        html, body, div {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -31,12 +31,12 @@
 
 </head>
 <body>
-
-
     <script type="text/javascript">
         var collection = {};
         var current = undefined;
         var count = 0;
+        var cssQueryLandscape = window.matchMedia("(orientation: landscape)");
+        var cssQueryPortrait = window.matchMedia("(orientation: portrait)");
 
         function debounce(func, wait, immediate) {
             var timeout;
@@ -87,7 +87,7 @@
                 devicePixelRatio: window.devicePixelRatio,
                 assumedPixelRatio: (window.screen.availWidth / document.documentElement.clientWidth),
                 screenOrientation: (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation,
-                mediaOrientation: 'tbd',
+                mediaOrientation: cssQueryLandscape ? 'landscape' : cssQueryPortrait ? 'portrait' : 'unknown',
                 action: count++
             };
 
@@ -173,16 +173,19 @@
 
         var resizeDebounce = debounce(function () {
             var toAdd = getScreenData();
-            var result = false;
-            var pos;
-            for (pos = 0; pos < collection.recorded.length; pos++) {
-                result = result | isDataSame(collection.recorded[0], toAdd);
-            }
+            //var result = false;
+            //var pos;
+            //for (pos = 0; pos < collection.recorded.length; pos++) {
+            //    result = result | isDataSame(collection.recorded[0], toAdd);
+            //}
 
-            if (!result) {
-                collection.recorded.push(toAdd);
-            }
-        }, 250);
+            //if (!result) {
+            collection.recorded.push(toAdd);
+            //}
+
+            console.log("resize");
+            console.log(collection);
+        }, 300);
 
         function setup() {
             resetCollection();
@@ -194,13 +197,11 @@
 
 
     </script>
-
     <div id="step1" class="step show">
         <h1>1. Put phone in landscape (horizontal) orientation and then push next.</h1>
         <br />
         <button onclick="return goNextStep(1);">Next</button>
     </div>
-
     <div id="step2" class="step">
         <h1>2. Put focus on the text box below, let the keyboard show, and then push next.</h1>
         <br />
@@ -208,13 +209,11 @@
         <br />
         <button onclick="return goNextStep(2);">Next</button>
     </div>
-
     <div id="step3" class="step">
         <h1>3. Put phone in portrait (vertical) orientation and then push next.</h1>
         <br />
         <button onclick="return goNextStep(3);">Next</button>
     </div>
-
     <div id="step4" class="step">
         <h1>4. Put focus on the text box below, let the keyboard show, and then push next.</h1>
         <br />
@@ -222,16 +221,13 @@
         <br />
         <button onclick="return goNextStep(4);">Next</button>
     </div>
-
     <div id="step5" class="step">
         <h1>5. Press the upload button to submit</h1>
         <br />
         <button onclick="return sendData();">Upload</button>
     </div>
-
     <div id="step6" class="step">
         <h1>Thank You</h1>
     </div>
-
 </body>
 </html>
