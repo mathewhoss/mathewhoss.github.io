@@ -4,230 +4,27 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Screen Collection</title>
-    <style type="text/css">
-
-        html, body, div {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            display: block;
-            height: 100%;
-        }
-
-        @-ms-viewport {
-            width: device-width;
-        }
-
-        .step {
-            display: none;
-            text-align: center;
-        }
-
-        .show {
-            display: block;
-        }
-    </style>
-
+    <title></title>
+    <link rel="stylesheet" href="modules/main.min.css" />
 </head>
 <body>
-    <script type="text/javascript">
-        var collection = {};
-        var current = undefined;
-        var count = 0;
-        var cssQueryLandscape = window.matchMedia("(orientation: landscape)");
-        var cssQueryPortrait = window.matchMedia("(orientation: portrait)");
+    <div id="app">
+        <main>
 
-        function debounce(func, wait, immediate) {
-            var timeout;
-            return function () {
-                var context = this, args = arguments;
-                var later = function () {
-                    timeout = null;
-                    if (!immediate) func.apply(context, args);
-                };
-                var callNow = immediate && !timeout;
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-                if (callNow) func.apply(context, args);
-            };
-        };
+        </main>
 
-        function resetCollection() {
-            current = undefined;
-            collection = {
-                1: {},
-                2: {},
-                3: {},
-                4: {},
-                recorded: []
-            };
-        }
+        <header>
 
-        function getScreenData() {
-            //// screen resolution
-            //var sw = window.screen.width;
-            //var sh = window.screen.height;
-            //var saw = window.screen.availWidth;
-            //var sah = window.screen.availHeight;
-            //var ww = window.innerWidth;
-            //var wh = window.innerHeight;
-            ////var dppx = (window.devicePixelRatio || 0);
-            //var pxr = window.devicePixelRatio || (window.screen.availWidth / document.documentElement.clientWidth);
-            //var jso = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
-            ////var cso =
+        </header>
 
-            return {
-                screenWidth: window.screen.width,
-                screenHeight: window.screen.height,
-                screenAvailWidth: window.screen.availWidth,
-                screenAvailHeight: window.screen.availHeight,
-                windowWidth: window.innerWidth,
-                windowHeight: window.innerHeight,
-                devicePixelRatio: window.devicePixelRatio,
-                assumedPixelRatio: (window.screen.availWidth / document.documentElement.clientWidth),
-                screenOrientation: (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation,
-                mediaOrientation: cssQueryLandscape.matches ? 'landscape' : cssQueryPortrait.matches ? 'portrait' : 'unknown',
-                action: count++
-            };
+        <nav id="actionMenu">
 
-        }
+        </nav>
 
-        function isDataSame(one, two) {
-            if (one.screenWidth != two.screenWidth) {
-                return false;
-            }
+        <nav id="mainMenu">
 
-            if (one.screenHeight != two.screenHeight) {
-                return false;
-            }
+        </nav>
 
-            if (one.screenOrientation != two.screenOrientation) {
-                return false;
-            }
-
-        }
-
-        function inputFocus() {
-            console.log("input focus");
-            current = getScreenData();
-        }
-
-        function goNextStep(currentStep) {
-            console.log("next step");
-            collection[currentStep] = (current || getScreenData());
-            document.getElementById('step' + currentStep).classList.remove('show');
-            document.getElementById('step' + (currentStep + 1)).classList.add('show');
-            current = undefined;
-            console.log(collection);
-            return false;
-        }
-
-        function sendData() {
-
-            //var oauthAuth = new window.GitHub({
-            //    token: 'a9baa6a7431fbc3336f75d35f200d583df98da0c'
-            //});
-
-            //var repository = window.oauthAuth.getRepo('mathewhoss', 'mathewhoss.github.io');
-
-            /*repository.write(
-                'master', // e.g. 'master'
-                'test.txt', // e.g. 'blog/index.md'
-                'THE_CONTENT', // e.g. 'Hello world, this is my new content'
-                'YOUR_COMMIT_MESSAGE', // e.g. 'Created new index'
-                function (err) { }
-            );*/
-
-            let data = {
-                message: "data send",
-                content: btoa(JSON.stringify(collection, null, 2))
-            };
-
-            let id = 'xxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
-            });
-
-            let d = new Date();
-            let n = d.getTime();
-
-            let filename = n + '-' + id + '.txt';
-
-
-            let xhr = new XMLHttpRequest();
-
-            var secret = '  dG9rZW4gMWFmODJkODI1NDlhNjU5MzI3MTQzZjE1NGY4ZTgxMDJmMDgxNTg5NA  ';
-
-            xhr.open("PUT", "https://api.github.com/repos/mathewhoss/mathewhoss.github.io/contents/results/" + filename);
-            xhr.setRequestHeader('Authorization', atob(secret.substring(2).substring(0, secret.length - 4) + '=='));
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-            //xhr.setRequestHeader('Accept', 'application/vnd.github.v3');
-            xhr.send(JSON.stringify(data));
-
-            document.getElementById('step5').classList.remove('show');
-            document.getElementById('step6').classList.add('show');
-
-            return false;
-        }
-
-        var resizeDebounce = debounce(function () {
-            var toAdd = getScreenData();
-            //var result = false;
-            //var pos;
-            //for (pos = 0; pos < collection.recorded.length; pos++) {
-            //    result = result | isDataSame(collection.recorded[0], toAdd);
-            //}
-
-            //if (!result) {
-            collection.recorded.push(toAdd);
-            //}
-
-            console.log("resize");
-            console.log(collection);
-        }, 300);
-
-        function setup() {
-            resetCollection();
-            collection.recorded.push(getScreenData());
-            window.addEventListener('resize', resizeDebounce);
-        }
-
-        setup();
-
-
-    </script>
-    <div id="step1" class="step show">
-        <h1>1. Put phone in landscape (horizontal) orientation and then push next.</h1>
-        <br />
-        <button onclick="return goNextStep(1);">Next</button>
-    </div>
-    <div id="step2" class="step">
-        <h1>2. Put focus on the text box below, let the keyboard show, and then push next.</h1>
-        <br />
-        <input type="text" onfocus="inputFocus();" />
-        <br />
-        <button onclick="return goNextStep(2);">Next</button>
-    </div>
-    <div id="step3" class="step">
-        <h1>3. Put phone in portrait (vertical) orientation and then push next.</h1>
-        <br />
-        <button onclick="return goNextStep(3);">Next</button>
-    </div>
-    <div id="step4" class="step">
-        <h1>4. Put focus on the text box below, let the keyboard show, and then push next.</h1>
-        <br />
-        <input type="text" onfocus="inputFocus();" />
-        <br />
-        <button onclick="return goNextStep(4);">Next</button>
-    </div>
-    <div id="step5" class="step">
-        <h1>5. Press the upload button to submit</h1>
-        <br />
-        <button onclick="return sendData();">Upload</button>
-    </div>
-    <div id="step6" class="step">
-        <h1>Thank You</h1>
     </div>
 </body>
 </html>
