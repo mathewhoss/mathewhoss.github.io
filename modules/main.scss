@@ -1,0 +1,142 @@
+﻿$color-background-dark: #18345D;
+$color-background-medium: #D6D1D0;
+$color-background-medium-2: #94959F;
+$color-background-light: #FFFFFF;
+
+@import 'normalize.scss';
+@import 'icon.scss';
+
+@-ms-viewport {
+    width: device-width;
+}
+
+@mixin reset-box {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: block;
+}
+
+// using the following media queries https://www.freecodecamp.org/news/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862/
+
+
+@mixin for-medium-width-up {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin for-large-width-up {
+    @media (min-width: 1800px) {
+        @content;
+    }
+}
+
+@mixin for-mobile-portrait {
+    @media (pointer: coarse) and (max-ascpect-ratio : 13/9) {
+        @content;
+    }
+}
+
+@mixin for-any-landscape {
+    @media (pointer: coarse) and (min-ascpect-ratio : 13/9), (ppointer-events: fine) {
+        @content;
+    }
+}
+
+
+
+
+html {
+    /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+    /* Document
+   ========================================================================== */
+    /**
+        * 1. Correct the line height in all browsers.
+        * 2. Prevent adjustments of font size after orientation changes in iOS.
+    */
+    line-height: 1.15; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+
+    // app
+    height: 100%;
+}
+
+body {
+    @include reset-box;
+    background-color: red; //temporary
+    height: 100%;
+}
+
+div {
+    @include reset-box;
+}
+
+#app {
+    height: 100%;
+    min-width: 320px;
+    display: grid;
+
+    grid-template-columns: 3.5em auto;
+    grid-template-rows: 3.5em 3.5em auto;
+    grid-template-areas: "menu header" "menu action" "menu content";
+
+    @include for-medium-width-up {
+        grid-template-columns: 10em auto;
+        grid-template-rows: 3.5em 3.5em auto;
+        grid-template-areas: "menu header" "menu action" "menu content";
+    }
+
+    @include for-mobile-portrait {
+        grid-template-columns: auto;
+        grid-template-rows: 3.5em 3.5em auto 3.5em;
+         grid-template-areas: "header" "action" "content" "menu";
+    }
+
+
+    /*grid-template-columns: auto;
+    grid-template-rows: 3.5em 3.5em auto 3.5em;
+    grid-template-areas: "header" "action" "content" "menu";*/
+
+    /*grid-template-columns: 3.5em auto;
+    grid-template-rows: 3.5em 3.5em auto;
+    grid-template-areas: "menu header" "menu action" "menu content";
+
+    @include for-desktop-up {
+        grid-template-columns: 10em auto;
+        grid-template-rows: 3.5em 3.5em auto;
+        grid-template-areas: "menu header" "menu action" "menu content";
+    }*/
+    /*@include for-tablet-landscape-up {
+        grid-template-columns: 10em auto;
+        grid-template-rows: 3.5em 3.5em auto;
+        grid-template-areas: "menu header" "menu action" "menu content";
+    }*/
+}
+
+
+#mainMenu {
+    @include reset-box;
+    background-color: $color-background-dark;
+    grid-area: menu;
+}
+
+#actionMenu {
+    @include reset-box;
+    background-color: $color-background-medium-2;
+    grid-area: action;
+}
+
+header {
+    @include reset-box;
+    background-color: $color-background-light;
+    grid-area: header;
+}
+
+main {
+    @include reset-box;
+    background-color: $color-background-medium;
+    grid-area: content;
+    overflow-y: scroll;
+}
+
